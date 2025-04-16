@@ -61,13 +61,6 @@ const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const stripeWebhooks = async (request, response) => {
   const sig = request.headers["stripe-signature"];
 
-  console.log("sig", sig);
-  console.log("request.body ", request.body);
-  console.log(
-    "process.env.STRIPE_WEBHOOK_SECRET",
-    process.env.STRIPE_WEBHOOK_SECRET
-  );
-
   let event;
   try {
     event = Stripe.webhooks.constructEvent(
@@ -75,8 +68,6 @@ export const stripeWebhooks = async (request, response) => {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-
-    console.log(event);
   } catch (error) {
     // console.log(error);
     response.status(400).send(`Webhook Error: ${error.message}`);

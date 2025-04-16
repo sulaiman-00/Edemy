@@ -3,7 +3,6 @@ import { AppContext } from "../../context/AppContext";
 import { Line } from "rc-progress";
 import Footer from "../../components/student/Footer";
 import axios from "axios";
-import { data } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const MyEnrollments = () => {
@@ -20,13 +19,13 @@ const MyEnrollments = () => {
 
   const [progressArray, setProgressArray] = useState([]);
 
-  const getCourseProgress = async (courseId) => {
+  const getCourseProgress = async () => {
     try {
       const token = await getToken();
       const tempProgressArray = await Promise.all(
         enrolledCourses.map(async (course) => {
           const { data } = await axios.post(
-            `{backendUrl}/api/user/get-course-progress`,
+            `${backendUrl}/api/user/get-course-progress`,
             {
               courseId: course._id,
             },
@@ -66,7 +65,7 @@ const MyEnrollments = () => {
   }, [enrolledCourses]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen justify-between">
       <div className="md:px-32 px-8 pt-10">
         <h1 className="text-2xl font-semibold">My Enrollments</h1>
         <table className="md:table-auto table-fixed w-full overflow-hidden border mt-10">
@@ -128,7 +127,7 @@ const MyEnrollments = () => {
         </table>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

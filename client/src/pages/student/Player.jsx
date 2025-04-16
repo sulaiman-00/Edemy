@@ -231,7 +231,9 @@ const Player = () => {
           {playerData ? (
             <div>
               <YouTube
-                videoId={playerData.lectureUrl.split("/").pop()}
+                videoId={
+                  playerData.lectureUrl.split("/").pop()?.split("=")?.[1]
+                }
                 iframeClassName="w-full aspect-video"
               />
               <div className="flex items-center justify-between mt-1">

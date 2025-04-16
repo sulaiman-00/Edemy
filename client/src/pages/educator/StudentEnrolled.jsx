@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { dummyStudentEnrolled } from "../../assets/assets";
 import Loading from "../../components/student/Loading";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
@@ -64,7 +63,7 @@ const StudentEnrolled = () => {
                     alt=""
                     className="w-9 h-9 rounded-full"
                   />
-                  <span className="truncate">{item.student.name}</span>
+                  <span className="truncate">{item?.student?.name}</span>
                 </td>
                 <td className="px-4 py-3">{item.courseTitle}</td>{" "}
                 <td className="px-4 py-3 hidden sm:table-cell">
