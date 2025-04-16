@@ -1,3 +1,4 @@
+import Stripe from "stripe";
 import Course from "../models/Course.js";
 import { CourseProgress } from "../models/CourseProgress.js";
 import { Purchase } from "../models/Purchase.js";
@@ -70,9 +71,9 @@ export const purchaseCourse = async (req, res) => {
     const newPurchase = await Purchase.create(purchaseData);
 
     //srtipe gateway initialize
-    const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
+    const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-    const currency = process.env.currency.toLowerCase();
+    const currency = process.env.CURRENCY.toLowerCase();
 
     const line_items = [
       {
@@ -98,12 +99,12 @@ export const purchaseCourse = async (req, res) => {
     });
 
     res.json({
-      success: "true",
+      success: true,
       session_url: session.url,
     });
   } catch (error) {
     res.json({
-      success: "false",
+      success: false,
       message: error.message,
     });
   }

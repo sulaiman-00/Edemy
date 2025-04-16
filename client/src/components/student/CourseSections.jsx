@@ -17,7 +17,7 @@ const CourseSections = () => {
       </p>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] px-4 md:px-0 md:my-16 my-10 gap-4 ">
-        {allCourses.slice(0, 4).map((course, index) => (
+        {allCourses?.slice(0, 4).map((course, index) => (
           <CourseCard key={index} course={course} />
         ))}
       </div>
